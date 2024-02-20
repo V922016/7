@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <!-- тайтл, отражается в имени страницы (во вкладке) -->
+        <title>The Mole Game</title>
+        <!--
+            - в теге style описываем стили элементов
+            - к элементу/ам применяется самый последний стиль по расположению в коде
+            - при этом, чем конкретнее, тем ниже в этой иерархии стиль,
+            т.е. если для <div id="test" class="abc def"> описать цвет фона в
+                .abc {
+                    background-color: yellow;
+                }
+                .def {
+                    background-color: black;
+                }
+                #test {
+                    background-color: blue;
+                }
+                div {
+                    background-color: red;
+                }
+            то применится #test, т.к. он самый конкретный, он для id.
+            Если стиль #test убрать, то применится .def, т.к. среди классов он ниже по коду.
+            - и они наследуются, т.е. если цвет фона описан в div, в .def описана граница,
+            а в #test ширина и высота, то в итоге элемент div с этим классом и под этим идентификатором
+            получит все эти стили.
+
+        -->
+        <style>
+            .cell { /*применяется для всех элементов с классом cell*/
+                width: 90px; /*ширина блока*/
+                height: 90px; /*высота блока*/
+                background-color: yellow; /*цвет фона блока*/
+                display: inline-block; /*рисуем блок в строку*/
+                border: 1px solid black; /*рисуем границу: ширина, сплошная линия, цвет*/
+                box-sizing: border-box; /*считаем размер блока с учётом границы*/
+            }
+
+            .cell-clicked { /*применяется для всех элементов с классом cell-clicked*/
+                background-color: blue;
+                border: 1px solid black;
+            }
+
+            .cell-mole { /*применяется для всех элементов с классом cell-mole*/
+                image-rendering: auto;
+                background-color: green;
+                border: 1px solid black;
+            }
+
+            .mole-norm {
+                background-image: url("images/laughing-lol-crazy-clean.png");
+                background-repeat: no-repeat;
+                background-position: center;                 
+                border: 1px solid black;
+            }
+
+            .mole-crushed {
+                background-image: url("images/rage-red-eyes.png");
+                background-repeat: no-repeat;
+                background-position: center; 
+                border: 1px solid black;
+            }
+
+            #game { /*применяется для элемента с id game*/
+                width: 540px;
+                height: 540px;
+                background-color:blue;
+                position: absolute; /*говорим, что позиция элемента абсолютная и считается относительно родительского элемента*/
+                top: 50%; /*отступаем сверху на 50% высоты родительского элемента (в данном случае body)*/
+                left: 50%; /*отступаем слева на 50% ширины родительского элемента (в данном случае body)*/
+                /*отступ считается от границ body до верхнего левого угла элемента, т.е. в центре будет этот угол, а не сам элемент*/
+                transform: translate(-50%, -50%); /*смещаем элемент на половину его высоты и ширины вверх влево*/
+                 /*font-size тут появился для решения проблемы с отображением inline-block, т.к. были пробелы из-за отступов в html и сейчас неактуален*/
+                font-size: 0px;
+                border: 1px solid white;
+            }
+
+            #score { /*применяется для элемента с id score*/
+                top: 10%;
+                left: 30%;
+                position: absolute;
+                transform: translate(-50%, -50%);
+            }
+
+            #lose { /*применяется для элемента с id lose*/
+                top: 10%;
+                left: 60%;
+                position: absolute;
+                transform: translate(-50%, -50%);
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="game"></div> <!-- Контейнер для нашей игры. Заполняем динамически скриптом ниже, добавляя внутрь элементы <div class="cell"></div> -->
+        <div id="score">0</div> <!-- Контейнер для счёта пойманных-->
+        <div id="lose">0</div> <!-- Контейнер для счёта пропущенных-->
+        <!--<div class="img-norm">
+            <img src="images/laughing-lol-crazy-clean.png">
+        </div>
+        <div class="img-crushed">
+        <img src="images/rage-red-eyes.png">
+        </div>-->
+        <script src="getDoc.js" defer></script> 
+    </body>
+</html>
