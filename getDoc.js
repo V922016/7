@@ -1,3 +1,4 @@
+//example changing branch comment!
 //нашли контейнер с игрой по id
 const game = document.getElementById("game");
 //нашли контейнер для счёта по id
